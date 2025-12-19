@@ -1,0 +1,174 @@
+# personal practice notes only
+*.p.txt
+
+## How to think about the task (supervision style)
+
+When you start, **do NOT write code immediately**.  
+First make sure you can **describe everything in words**:  
+what it means in the **real world** and what it means as a **programmer**.
+
+---
+
+## 1. Understand the input
+
+### Real world
+- What does one `FundingRequest` represent in reality?
+in short: 
+a request for money
+with state and metadata
+
+A FundingRequest represents one financial request for funding, 
+created at a specific time, with a defined requested amount, 
+that is later processed and evaluated by the system.
+
+- Who creates it and why does it exist?
+A FundingRequest is created by a requesting party 
+that asks for financial resources. 
+It exists to formally record the request so it can be reviewed, 
+decided upon, and later reported or audited.
+
+- What decision or process does it belong to?
+A FundingRequest is the unit that moves through an approval process
+and carries all information needed to make a funding decision.
+
+### As a programmer
+
+- What is a `FundingRequest` structurally?
+
+  - What kind of thing is it in C#?  
+    It is a record type that defines the structure of a data object by grouping
+    related values (Id, Amount, Status, SubmissionDate) into one unit.
+
+  - What does it contain?  
+    A fixed set of named, typed fields.
+
+  - Does it do anything, or does it only describe data?  
+    It only describes data and contains no business logic.
+
+
+- What does the `namespace` tell you?
+  - Why is this type placed inside a namespace?
+  To organize code and prevent name collisions.
+
+  - How does this help organize code?
+  By grouping related code and avoiding name collisions.
+  
+  - How do other files access this type?
+    By importing its namespace, 
+    so the compiler knows where the type is defined.
+    
+    With:
+    using ReportingChallenge.src;
+    FundingRequest request = new FundingRequest(...);
+
+    Without:
+    ReportingChallenge.src.FundingRequest request = new ReportingChallenge.src.FundingRequest(...);
+
+
+- Why is this a `record` and not a class?
+  - What is a `record` used for?
+  - What problem does it solve compared to a class?
+  - Why is it a good fit for a funding request?
+
+
+
+### Fields
+- Which fields matter for this task?  
+  - `Status`
+  - `Amount`
+  - `SubmissionDate`
+- Can any field be:
+  - null?
+  - empty?
+  - zero?
+  - negative?
+
+---
+
+## 2. Define the output
+
+### Grouping
+- What exactly should `GroupByStatus` return?
+- What does one key represent?
+- What does one value (list) represent?
+- Which keys do you *expect*?
+  - `"Approved"`
+  - `"Review"`
+  - `"Rejected"`
+
+### Budget warnings
+- What is a budget warning *conceptually*?
+- What information must it contain?
+- What should one warning look like as a string?
+
+Example:
+Request Id=2: Amount 75000 exceeds limit 50000
+
+
+---
+
+## 3. Plan the steps (no code)
+
+- How would you explain the full solution in **3–5 sentences** to another developer?
+- Which operations are:
+  - grouping?
+  - filtering?
+  - formatting?
+- Where does LINQ *replace* manual loops?
+- Which helper ideas exist conceptually?
+  - checking limits
+  - formatting messages
+
+---
+
+## 4. Think about edge cases
+
+- What if the input list is empty?
+- What if an unknown status appears?
+- What if `Amount` is `0`?
+- What if `Amount` is negative?
+- Should anything be ignored, grouped, or warned about?
+
+---
+
+## 5. Read the tests as specification
+
+- How many groups do the tests expect?
+- How many warnings do they expect?
+- Which values are asserted?
+- Do you understand **why** each assertion exists?
+
+---
+
+## 6. Only then start coding
+
+1. Implement `GroupByStatus` → run `dotnet test`
+2. Implement `GetBudgetWarnings` → run `dotnet test`
+3. Implement `GenerateReport` → check console output
+
+---
+
+## 7. Understand the surrounding code (context)
+
+- What is the responsibility of `FundingCenterReporter`?
+  - What kind of logic belongs there?
+  - What kind of logic does *not* belong there?
+
+- What is the role of `Program.cs`?
+  - Why is logic not implemented there?
+  - What does “orchestration” mean in this context?
+
+- What is the role of the test project?
+  - What behavior is specified by tests?
+  - What is left intentionally unspecified?
+
+---
+
+## 8. Responsibility check (before coding)
+
+Before writing code, verify:
+
+- The data model (`FundingRequest`) contains no logic
+- The reporter contains transformation and reporting logic
+- The program only wires things together
+- Tests define correctness, not implementation
