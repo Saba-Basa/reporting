@@ -67,22 +67,83 @@ and carries all information needed to make a funding decision.
 
 - Why is this a `record` and not a class?
   - What is a `record` used for?
-  - What problem does it solve compared to a class?
-  - Why is it a good fit for a funding request?
+  To model structured data made up of related values.
 
+  - What problem does it solve compared to a class?
+  A record is used to represent data, not behavior, 
+  while a class is typically
+  used to model objects that contain behavior and operations.
+
+  - Why is it a good fit for a funding request?
+  A funding request represents data about a request, while actions like
+  approving or rejecting it belong to separate logic.  
 
 
 ### Fields
 - Which fields matter for this task?  
   - `Status`
+    Represents the current decision state of the request and is used for grouping.
+
   - `Amount`
+    Represents the requested amount of money and is used for budget checks.
+
   - `SubmissionDate`
+    Represents the time when the funding request was submitted
+
+  -> status, what
+    amount, how much
+    submissionDate, when
+
 - Can any field be:
   - null?
-  - empty?
-  - zero?
-  - negative?
+    Only `Status` can be null, because it is a reference type (`string`), while
+    `Id`, `Amount`, and `SubmissionDate` are value types.
 
+    - A reference type stores a reference (address) to an object in memory.
+    The reference can be `null`, meaning no object exists.
+    - A value type stores the actual value directly.
+    It must always contain a value and therefore cannot be null.
+
+    Example (reference type):
+    `string status = null;`  
+    The variable does not contain text; it would only point to where the text
+    is stored. `null` means there is no object.
+
+    Example (value type):
+    `int id = 0;`  
+    The variable directly contains the number. There is no concept of a
+    “missing int”, so `int id = null` is not allowed.
+
+    Applied to this model:
+    - `Status = null` → request exists, but its state is unknown
+    - `Id`, `Amount`, `SubmissionDate` → always have a value
+
+  - empty?
+    - `Status = ""` → the request exists, but its state is unspecified or invalid
+    - `Id`, `Amount`, and `SubmissionDate` cannot be empty, because value types
+    do not have an “empty” state, only concrete values.
+
+  - zero?
+    `Id` and `Amount` can be zero because they are numeric value types.
+
+    Example:
+    `int id = 0;`  
+    `decimal amount = 0m;`  
+    Zero represents a valid numeric value, not a missing one.
+
+    `SubmissionDate` cannot be zero.
+    It is a `DateTime` value type and always
+    represents a concrete point in time
+
+    `Status` cannot be zero, because it is a string.
+    `"0"` would be a string value, not the number zero.
+
+  - negative?
+    `Id` and `Amount` can technically be negative because they are numeric
+    value types.  
+    `SubmissionDate` cannot be negative, and `Status` cannot be negative
+    because it is a string.
+    
 ---
 
 ## 2. Define the output
