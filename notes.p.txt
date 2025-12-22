@@ -166,26 +166,111 @@ Context: FundingCenterReporter
   performs computations only on the input data it receives.
 
 ------------------------------------------------------------
-Grouping (GroupByStatus)
+Grouping (GroupByStatus) — Reasoning Template
 ------------------------------------------------------------
 
-Method signature:
+Method:
 Dictionary<string, List<FundingRequest>> GroupByStatus(
     IEnumerable<FundingRequest> requests
 )
 
-- What does it mean for a method to return a value?
-- What does the return type Dictionary<string, List<FundingRequest>> describe?
-- What is a Dictionary in C#?
+1. Purpose
+- What responsibility does this method have in the reporting process?
+The responsibility of this method is to organize funding requests into groups 
+based on their approval status for reporting purposes.
+
+- What question does it answer about the funding requests?
+Which requests are approved, 
+which are under review, and which are rejected?
+
+2. Input → Output (Transformation)
+- What is the input data?
+an iterable sequence of funding requests.
+
+- What information is produced as output?
+a mapping that associates each status 
+with the list of requests that have that status.
+key   → status
+value → list of requests with that status
+"Approved"  → [req1, req2, req3]
+"Review"    → [req4]
+"Rejected"  → [req5]
+
+- How is the input transformed into the output?
+The input is transformed by examining each funding request 
+and assigning it to a group based on its status.
+
+- What does returning this value enable the caller to do?
+It enables the caller to easily inspect, analyze, 
+or report on funding requests per approval status.
+
+3. Data Modeling
+- Why is the result a Dictionary?
+Because the result needs to represent an 
+association between each status 
+and the group of funding requests with that status.
+This association is expressed using a key–value structure.
+
 - Why is string used as the key type?
+Because the approval status is represented as a string 
+in the data model, 
+and the grouping key must match that representation.
+
 - Why is the value a List<FundingRequest> and not a single object?
-- What does one key in this dictionary represent conceptually?
+Because each status can correspond to many funding requests, 
+the value needs to be a collection rather than a single object.
+Since dictionary keys must be unique, 
+using a single object would either overwrite
+previous requests or lose information.
+"Approved" → req1 ....
+
+- What does one key represent conceptually?
+one key represents one approval state 
+used to categorize funding requests.
+"Approved" →
+
 - What does one list (value) represent conceptually?
-- How does this structure relate to the approval process?
-- Which status values do you expect to appear as keys?
-- Should the method assume only these keys exist, or derive them from the input?
-- What should happen if the input contains an unknown status?
-- What should the method return if the input sequence is empty?
+one list represents the group of funding requests belonging to a single approval category.
+→ [req1, req2, req3]
+
+4. Assumptions & Boundaries
+- Which status values are expected to appear as keys?
+"Approved", "Review", "Rejected"
+but the actual keys are derived from the input data.
+
+- Are these keys assumed in advance or derived from the input?
+derived from the input
+The dictionary groups requests by 
+whatever status values actually appear in the input data, 
+regardless of whether those statuses are predefined or expected.
+
+- What should happen if an unknown status appears?
+It should be grouped like any other status, 
+resulting in a new key
+with the corresponding funding requests as its value.
+
+5. Edge Cases
+- What should be returned if the input sequence is empty?
+An empty dictionary
+requests = [] -> {}
+
+- Should empty groups ever appear?
+grouping only creates groups
+for statuses that actually occur in the input data.
+at least one item belongs to it
+requests = [Approved]→ { "Approved" → [req] }
+
+- Is an unknown status an error or just another group?
+It is not an error, because the method groups 
+by whatever status values
+appear in the input data
+
+6. Responsibility Check
+- Does this method only transform data, or does it make decisions?
+The method only transforms data
+- What would clearly not belong in this method?
+Any business or validation logic.
+
 
 
 ------------------------------------------------------------
