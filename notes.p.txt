@@ -143,27 +143,97 @@ and carries all information needed to make a funding decision.
     value types.  
     `SubmissionDate` cannot be negative, and `Status` cannot be negative
     because it is a string.
-    
+
 ---
 
-## 2. Define the output
+============================================================
+QUESTIONS — FundingCenterReporter
+============================================================
 
-### Grouping
-- What exactly should `GroupByStatus` return?
-- What does one key represent?
-- What does one value (list) represent?
-- Which keys do you *expect*?
-  - `"Approved"`
-  - `"Review"`
-  - `"Rejected"`
+Context: FundingCenterReporter
 
-### Budget warnings
-- What is a budget warning *conceptually*?
-- What information must it contain?
-- What should one warning look like as a string?
+- What is the responsibility of the FundingCenterReporter class?
+  The responsibility of the FundingCenterReporter class is to 
+  interpret funding request data and derive grouped 
+  summaries and budget warnings from it.
 
-Example:
-Request Id=2: Amount 75000 exceeds limit 50000
+- Why is this logic placed in a separate class and not in Program.cs?
+  The logic is separated to keep Program.cs focused on 
+  orchestration and to isolate reporting logic in its own class.
+
+- Does this class store state, or does it only operate on provided data?
+  The class is stateless and 
+  performs computations only on the input data it receives.
+
+------------------------------------------------------------
+Grouping (GroupByStatus)
+------------------------------------------------------------
+
+Method signature:
+Dictionary<string, List<FundingRequest>> GroupByStatus(
+    IEnumerable<FundingRequest> requests
+)
+
+- What does it mean for a method to return a value?
+- What does the return type Dictionary<string, List<FundingRequest>> describe?
+- What is a Dictionary in C#?
+- Why is string used as the key type?
+- Why is the value a List<FundingRequest> and not a single object?
+- What does one key in this dictionary represent conceptually?
+- What does one list (value) represent conceptually?
+- How does this structure relate to the approval process?
+- Which status values do you expect to appear as keys?
+- Should the method assume only these keys exist, or derive them from the input?
+- What should happen if the input contains an unknown status?
+- What should the method return if the input sequence is empty?
+
+
+------------------------------------------------------------
+Budget warnings (GetBudgetWarnings)
+------------------------------------------------------------
+
+Method signature:
+IEnumerable<string> GetBudgetWarnings(
+    IEnumerable<FundingRequest> requests,
+    decimal limit
+)
+
+- What does IEnumerable<string> represent in C#?
+- Why does this method return strings instead of objects?
+- What does one string in the result represent?
+- What is a “budget warning” in real-world terms?
+- What condition causes a warning to be generated?
+- What information must be included in each warning?
+- Why is the budget limit passed as a parameter instead of being hard-coded?
+- Should the order of warnings matter?
+- What should the method return if no requests exceed the limit?
+
+- Example format to reason about:
+  Request Id=2: Amount 75000 exceeds limit 50000
+
+
+------------------------------------------------------------
+High-level report (GenerateReport)
+------------------------------------------------------------
+
+Method signature:
+void GenerateReport(IEnumerable<FundingRequest> requests)
+
+- What does void indicate about this method?
+- Why does this method not return data?
+- What does it mean that this method is “not tested directly”?
+- Which other methods should this method call?
+- What responsibilities belong here, and which do not?
+- Why is this method concerned with console output rather than data structures?
+
+
+------------------------------------------------------------
+Final check
+------------------------------------------------------------
+
+- Can you explain the purpose of each method without mentioning C# syntax?
+- Can you explain the purpose of each method using only its signature?
+- Can you explain how data flows through this class from input to output?
 
 
 ---

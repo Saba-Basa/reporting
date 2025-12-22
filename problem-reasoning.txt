@@ -1,0 +1,38 @@
+SOFTWARE PROBLEM REASONING TEMPLATE
+
+1. Purpose
+- Why does this component exist?
+- What problem does it solve?
+- What responsibility does it have?
+
+2. Input → Output
+- What is the input?
+- What is the output?
+- What transformation happens in between?
+- raw data → derived / structured information
+
+3. Data Modeling
+- Why this data structure?
+- Why not a simpler or different one?
+- What does one unit of output represent conceptually?
+
+4. Assumptions & Boundaries
+- What may this code assume?
+- What must it derive from input?
+- What must it NOT invent, validate, or decide?
+
+5. Edge Cases
+- Empty input
+- Unknown or unexpected values
+- Absence vs error
+- Zero / null / negative values
+
+6. Responsibility Check
+- Does this component store state or only operate on data?
+- Why does this logic belong here and not elsewhere?
+- What would be wrong to put here?
+
+ANCHOR QUESTION
+"What is the input, 
+what is the output, 
+and what responsibility lies in between?"
