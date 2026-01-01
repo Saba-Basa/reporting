@@ -271,8 +271,6 @@ The method only transforms data
 - What would clearly not belong in this method?
 Any business or validation logic.
 
-
-
 ------------------------------------------------------------
 Budget warnings (GetBudgetWarnings)
 ------------------------------------------------------------
@@ -283,18 +281,48 @@ IEnumerable<string> GetBudgetWarnings(
     decimal limit
 )
 
-- What does IEnumerable<string> represent in C#?
-- Why does this method return strings instead of objects?
-- What does one string in the result represent?
-- What is a “budget warning” in real-world terms?
-- What condition causes a warning to be generated?
-- What information must be included in each warning?
-- Why is the budget limit passed as a parameter instead of being hard-coded?
-- Should the order of warnings matter?
-- What should the method return if no requests exceed the limit?
+1. Purpose
+- Why does this component exist?
+The method exists to identify and report budget violations.
+- What problem does it solve?
+It answers the problem: Which funding requests exceed a given budget limit.
+- What responsibility does it have?
+it deriving budget exceedance information 
+from funding requests and 
+expressing that information as warnings.
 
-- Example format to reason about:
-  Request Id=2: Amount 75000 exceeds limit 50000
+2. Input → Output
+
+- What is the input?
+- What is the output?
+- What transformation happens in between?
+
+3. Data Modeling
+
+- Why does this method return IEnumerable<string>?
+- Why return strings instead of objects?
+- What does one string represent conceptually?
+- What is a budget warning in real-world terms?
+
+4. Assumptions & Boundaries
+
+- What condition causes a warning to be generated?
+- What information must each warning include?
+- Why is the budget limit a parameter and not hard-coded?
+- What must this method not do?
+
+5. Edge Cases
+
+- What should happen if the input is empty?
+- What should happen if no request exceeds the limit?
+- Should the order of warnings matter?
+
+6. Responsibility Check
+
+- Does this method store state or only operate on data?
+- Why does this logic belong here?
+- What would be wrong to put here?
+
 
 
 ------------------------------------------------------------
@@ -304,23 +332,12 @@ High-level report (GenerateReport)
 Method signature:
 void GenerateReport(IEnumerable<FundingRequest> requests)
 
-- What does void indicate about this method?
-- Why does this method not return data?
-- What does it mean that this method is “not tested directly”?
-- Which other methods should this method call?
-- What responsibilities belong here, and which do not?
-- Why is this method concerned with console output rather than data structures?
-
+...
 
 ------------------------------------------------------------
 Final check
 ------------------------------------------------------------
-
-- Can you explain the purpose of each method without mentioning C# syntax?
-- Can you explain the purpose of each method using only its signature?
-- Can you explain how data flows through this class from input to output?
-
-
+...
 ---
 
 ## 3. Plan the steps (no code)
