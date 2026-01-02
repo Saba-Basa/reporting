@@ -1,0 +1,19 @@
+General Method Reasoning Template
+
+Step 1 — Responsibility:
+What is the method responsible for producing or deciding?
+
+Step 2 — Unit of output:
+What is the smallest meaningful piece of output?
+
+Step 3 — Cardinality:
+How many such units can exist (zero / one / many)?
+
+Step 4 — Representation:
+How should one unit be represented (text, number, structure)?
+
+Step 5 — Shape:
+How should multiple units be returned or handled?
+
+Step 6 — Exclusions:
+What does this method explicitly not do?

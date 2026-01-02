@@ -307,10 +307,38 @@ and violations are turned into warning messages.
 
 3. Data Modeling
 
+/*notes*/
+What is the method responsible for producing or deciding?
+A budget warning when a funding request exceeds the limit.
+
+What is the smallest meaningful piece of output?
+One warning message describing a single budget violation.
+
+How many such outputs can exist?
+Zero, one, or many.
+
+How should one unit be represented?
+A text message.
+
+How should multiple units be returned or handled?
+As a sequence of warning messages.
+
+/* enumerable: a row of items that can be iterated over as a sequence */
+
 - Why does this method return IEnumerable<string>?
+The method can produce zero, one, or many warning messages, each represented as a string, and they are returned as a sequence.
+
 - Why return strings instead of objects?
+The warnings are meant to be 
+human-readable report messages, 
+and no further structured processing is required.
+
 - What does one string represent conceptually?
+One warning message describing a single budget violation.
+
 - What is a budget warning in real-world terms?
+It is a notification that a requested amount is higher 
+than what is allowed by the budget.
 
 4. Assumptions & Boundaries
 
