@@ -294,8 +294,16 @@ expressing that information as warnings.
 2. Input → Output
 
 - What is the input?
+A budget limit and one or more funding requests to compare against it.
 - What is the output?
+A sequence of zero or more strings.
+If no funding request violates the budget limit, 
+the sequence is empty.
+If one or more requests violate the limit, 
+each violation is represented by one string.
 - What transformation happens in between?
+Funding requests are checked against the budget limit, 
+and violations are turned into warning messages.
 
 3. Data Modeling
 
