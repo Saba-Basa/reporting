@@ -1,0 +1,19 @@
+Step 1 — Identify the effect
+What happens? (What is produced, triggered, decided?)
+
+Step 2 — Identify the subject
+What thing is being evaluated or acted upon?
+
+Step 3 — Identify the reference
+What is the subject compared against or constrained by?
+
+Step 4 — Identify the axis of change
+What relation, comparison, or event causes the effect?
+
+Step 5 — Apply the condition form
+“Under what exact condition between <subject> and <reference>
+should <effect> occur?”
+
+Step 6 — Answer in one normalized sentence
+State the condition from the subject’s perspective,
+using canonical verbs (exceeds, equals, is less than).

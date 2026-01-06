@@ -342,6 +342,31 @@ than what is allowed by the budget.
 
 4. Assumptions & Boundaries
 
+/* notes Condition Reasoning Template
+
+Step 1 — Identify the effect:
+A warning is generated.
+
+Step 2 — Identify the subject:
+The funding request’s amount.
+
+Step 3 — Identify the reference:
+The budget limit.
+
+Step 4 — Identify the axis of change:
+Comparison of the request amount to the budget limit.
+
+Step 5 — Restated question:
+Under what exact condition between the funding request’s amount and the budget limit
+should a warning be generated?
+
+Step 6 — Normalized answer:
+A warning is generated when a funding request’s amount exceeds the budget limit.
+*/
+
+- What condition causes a warning to be generated?
+A warning is generated when a funding request’s amount exceeds the budget limit.
+
 - What condition causes a warning to be generated?
 - What information must each warning include?
 - Why is the budget limit a parameter and not hard-coded?
