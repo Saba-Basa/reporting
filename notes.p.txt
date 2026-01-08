@@ -367,7 +367,13 @@ A warning is generated when a funding request’s amount exceeds the budget limi
 - What condition causes a warning to be generated?
 A warning is generated when a funding request’s amount exceeds the budget limit.
 
-- What condition causes a warning to be generated?
+/*notes*/
+CONTENT
+-unit: warning
+-purpose: inform
+-required information:
+- 
+
 - What information must each warning include?
 - Why is the budget limit a parameter and not hard-coded?
 - What must this method not do?

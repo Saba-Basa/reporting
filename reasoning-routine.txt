@@ -1,0 +1,67 @@
+STEP 0 — CLASSIFY THE QUESTION
+--------------------------------
+What kind of question is this?
+
+[ ] CONDITION
+    → When / under what rule does something happen?
+
+[ ] CONTENT
+    → What must one unit include or contain?
+
+[ ] VARIABILITY
+    → Why is something configurable / a parameter?
+
+[ ] RESPONSIBILITY BOUNDARY
+    → What must this method NOT do?
+
+
+STEP 1 — APPLY THE MATCHING TEMPLATE
+--------------------------------
+
+IF CONDITION:
+- Effect:
+  -> What happens?
+- Subject:
+  -> What thing is being evaluated or acted upon?
+- Reference:
+  -> What is the subject compared against or constrained by?
+- Relation:
+  -> What relation between subject and reference triggers the effect?
+- Normalized sentence:
+  -> Under what exact condition should the effect occur?
+
+
+IF CONTENT:
+- Unit:
+  -> What is the smallest repeatable thing produced?
+- Purpose:
+  -> What is the single function of this thing?
+- Required information:
+  -> What facts must be known for this thing to fulfill that function?
+- Explicit exclusions:
+  -> What is explicitly NOT required?
+
+
+IF VARIABILITY:
+- What can change:
+  -> What value or rule differs between contexts or executions?
+- Who decides this value:
+  -> Who should control that change (caller or callee)?
+- Why it cannot be hard-coded:
+  -> Why must this not be fixed inside the method?
+
+
+IF RESPONSIBILITY BOUNDARY:
+- Core responsibility:
+  -> What is this method/class responsible for producing or deciding?
+- Adjacent concerns:
+  -> What related concerns exist nearby but are separate?
+- Explicit exclusions:
+  -> What must be excluded to keep the responsibility pure?
+
+
+STEP 2 — FINAL CHECK
+--------------------
+- Am I stating guarantees only?
+- Am I avoiding speculation?
+- Is the answer constrained to the code / problem given?
