@@ -372,7 +372,18 @@ CONTENT
 -unit: warning
 -purpose: inform
 -required information:
-- 
+1. Identity
+- funding request
+
+2. Relevant values
+- requested amount
+
+3. Reference / constraint
+- budget limit
+
+4. State / fact
+- exceeds-limit fact
+
 
 - What information must each warning include?
 - Why is the budget limit a parameter and not hard-coded?

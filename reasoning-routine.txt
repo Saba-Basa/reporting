@@ -32,12 +32,36 @@ IF CONDITION:
 
 
 IF CONTENT:
+-----------
+
 - Unit:
   -> What is the smallest repeatable thing produced?
+
 - Purpose:
   -> What is the single function of this thing?
-- Required information:
-  -> What facts must be known for this thing to fulfill that function?
+
+
+REQUIRED INFORMATION
+--------------------
+
+1. Identity
+   - What must be identifiable?
+   - If there are many of these, how do I distinguish this one from the others?
+   - What single thing does this warning point to?
+
+2. Relevant values
+   - What values are involved?
+   - Which quantities or data points matter?
+
+3. Reference / constraint
+   - What are those values compared against?
+   - What limit, rule, or context gives them meaning?
+
+4. State / fact
+   - What fact must be determinable?
+   - What must be true or false at the end?
+
+
 - Explicit exclusions:
   -> What is explicitly NOT required?
 
